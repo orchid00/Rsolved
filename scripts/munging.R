@@ -40,5 +40,9 @@ mtcars %>%
     mutate(vs = ifelse(vs == 0, "No", "Yes")) %>%
     column_to_rownames("rnames")
 
+## How to add explicit values to NA
+
+library(forcats) 
+fct_explicit_na(a_df$col, na_level = "None")
 
   
