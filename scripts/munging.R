@@ -45,4 +45,30 @@ mtcars %>%
 library(forcats) 
 fct_explicit_na(a_df$col, na_level = "None")
 
+## How to replace multiple values of a vector, like if it was a factor
+
+# initially I tried this with forcats
+library(forcats)
+replacement_vector <- LETTERS[1:3]
+replacement_vector
+# [1] "A" "B" "C"
+mtcars$gear
+# [1] 4 4 4 3 3 3 3 4 4 4 4 3 3 3 3 3 3 4 4 4 3 3 3 3 3 4 5 5 5 5 5 4
+
+forcats::lvls_revalue(factor(mtcars$gear), replacement_vector)
+# [1] B B B A A A A B B B B A A A A A A B B B A A A A A B C C C C C B
+# Levels: A B C
+
+# note: the column has not been substituted, the result is a factor, the order is something you might want to be caeful about
+
+# using this line to mutate a column
+
+mtcars %>%
+     mutate(gear = as.character(lvls_revalue(factor(gear), replacement_vector)))
+
+# I am thinking that there might be a better way (another function) to convert the factor, but this works well
+
+
+
+
   
