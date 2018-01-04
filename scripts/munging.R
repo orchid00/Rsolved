@@ -25,5 +25,20 @@ mtcars %>%
     mutate(cyl = replace(cyl, cyl == 6, NA)) %>%
     column_to_rownames("rnames")
 
+## How to replace a value from a given column based on the value of another column?
+# Use tibble again if you care to preserve rownames
+
+mtcars %>%
+    rownames_to_column("rnames") %>%
+    mutate(mpg = replace(mpg, cyl == 4, NA)) %>%
+    column_to_rownames("rnames")
+
+## How to replace two values from a given column at the same time?
+
+mtcars %>%
+    rownames_to_column("rnames") %>%
+    mutate(vs = ifelse(vs == 0, "No", "Yes")) %>%
+    column_to_rownames("rnames")
+
 
   
